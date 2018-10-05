@@ -64,12 +64,16 @@ Of the stations that serve the A train, 17 are ADA compliant.
 
 
 #problem 2
-###specify the sheet in the Excel file and to omit columns containing notes
+###clean the Mr. Trash Wheel sheet
 ```{r}
 library(readxl)
-tra_whe = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
-                     sheet = "Mr. Trash Wheel", range = "A2:N258" ) %>% 
-  janitor::clean_names()
+tra_whe = read_excel ("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+                     sheet = "Mr. Trash Wheel", range = "A2:N257" ) %>% 
+  janitor::clean_names() %>% 
+  rename(weight = weight_tons, volume = volume_cubic_yards) %>% 
+  filter(!is.na(dumpster)) %>% 
+  mutate(sports_balls = as.integer(sports_balls))
+
 tra_whe
 ```
 
