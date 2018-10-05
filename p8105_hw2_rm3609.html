@@ -364,6 +364,41 @@ prec</code></pre>
 ## 19 July       7.09  2017
 ## 20 August     4.44  2017</code></pre>
 </div>
+<div id="write-a-paragraph-about-these-data.-be-sure-to-note-the-number-of-observations-in-both-resulting-datasets-and-give-examples-of-key-variables.-for-available-data-what-was-the-total-precipitation-in-2017-what-was-the-median-number-of-sports-balls-in-a-dumpster-in-2016" class="section level3">
+<h3>Write a paragraph about these data. Be sure to note the number of observations in both resulting datasets, and give examples of key variables. For available data, what was the total precipitation in 2017? What was the median number of sports balls in a dumpster in 2016?</h3>
+</div>
+</div>
+<div id="problem-3" class="section level1">
+<h1>Problem 3</h1>
+<div id="clean-the-data" class="section level3">
+<h3>clean the data</h3>
+<pre class="r"><code>devtools::install_github(&quot;p8105/p8105.datasets&quot;)</code></pre>
+<pre><code>## Skipping install of 'p8105.datasets' from a github remote, the SHA1 (21f5ad1c) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<pre class="r"><code>library(p8105.datasets)
+data(brfss_smart2010)
+
+brfss_smart2010 = janitor::clean_names(brfss_smart2010) %&gt;% 
+  rename(resp_id = respid, loccation_abbr = locationabbr, location_desc = locationdesc) %&gt;% 
+  filter(topic == &quot;Overall Health&quot;)  %&gt;% 
+  select(year:location_desc, response, data_value)
+
+brfss_smart2010</code></pre>
+<pre><code>## # A tibble: 10,625 x 5
+##     year loccation_abbr location_desc         response  data_value
+##    &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;                 &lt;chr&gt;          &lt;dbl&gt;
+##  1  2010 AL             AL - Jefferson County Excellent       18.9
+##  2  2010 AL             AL - Jefferson County Very good       30  
+##  3  2010 AL             AL - Jefferson County Good            33.1
+##  4  2010 AL             AL - Jefferson County Fair            12.5
+##  5  2010 AL             AL - Jefferson County Poor             5.5
+##  6  2010 AL             AL - Mobile County    Excellent       15.6
+##  7  2010 AL             AL - Mobile County    Very good       31.3
+##  8  2010 AL             AL - Mobile County    Good            31.2
+##  9  2010 AL             AL - Mobile County    Fair            15.5
+## 10  2010 AL             AL - Mobile County    Poor             6.4
+## # ... with 10,615 more rows</code></pre>
+</div>
 </div>
 
 

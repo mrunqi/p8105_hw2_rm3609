@@ -97,4 +97,24 @@ prec = bind_rows(prec_16, prec_17) %>%
 prec
 ```
 
+###Write a paragraph about these data. Be sure to note the number of observations in both resulting datasets, and give examples of key variables. For available data, what was the total precipitation in 2017? What was the median number of sports balls in a dumpster in 2016?
+
+#Problem 3
+
+###clean the data
+```{r}
+devtools::install_github("p8105/p8105.datasets")
+library(p8105.datasets)
+data(brfss_smart2010)
+
+brfss_smart2010 = janitor::clean_names(brfss_smart2010) %>% 
+  rename(resp_id = respid, loccation_abbr = locationabbr, location_desc = locationdesc) %>% 
+  filter(topic == "Overall Health")  %>% 
+  select(year:location_desc, response, data_value)
+
+brfss_smart2010
+```
+
+
+
 
