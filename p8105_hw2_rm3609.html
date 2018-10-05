@@ -142,7 +142,11 @@ $(document).ready(function () {
 </div>
 <div id="problem-1" class="section level1">
 <h1>Problem 1</h1>
-<p>Read and clean the data; retain line, station, name, station latitude / longitude, routes served, entry, vending, entrance type, and ADA compliance. Convert the entry variable from character (YES vs NO) to a logical variable .</p>
+<div id="read-and-clean-the-data-retain-line-station-name-station-latitude-longitude-routes-served-entry-vending-entrance-type-and-ada-compliance." class="section level3">
+<h3>Read and clean the data; retain line, station, name, station latitude / longitude, routes served, entry, vending, entrance type, and ADA compliance.</h3>
+</div>
+<div id="convert-the-entry-variable-from-character-yes-vs-no-to-a-logical-variable-." class="section level3">
+<h3>Convert the entry variable from character (YES vs NO) to a logical variable .</h3>
 <pre class="r"><code>ny_subway = 
   read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv&quot;) %&gt;% 
   janitor::clean_names() %&gt;% 
@@ -182,9 +186,32 @@ $(document).ready(function () {
 ## #   route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;, entrance_type &lt;chr&gt;,
 ## #   entry &lt;lgl&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
 <p>The dataset contains line, station name, station latitude and longitude, routes served, entry, vending, entrance type, and ADA compliance.</p>
-<p>I have cleaned the variable names, selected the variables that I want, and change the entry variable from character to a logical variable.</p>
+<p>I have cleaned the variable names, selected the variables that I want, and changed the entry variable from character to a logical variable.</p>
 <p>The resulting dataset is 1868 x 19.</p>
 <p>The data is not tidy yet. Some column names contain variable.</p>
+</div>
+<div id="how-many-distinct-stations-are-there" class="section level3">
+<h3>How many distinct stations are there?</h3>
+<pre class="r"><code>dist_both = distinct(ny_subway, line, station_name, .keep_all = TRUE )
+dist_both</code></pre>
+<pre><code>## # A tibble: 465 x 19
+##    line  station_name station_latitude station_longitu… route1 route2
+##    &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+##  1 4 Av… 25th St                  40.7            -74.0 R      &lt;NA&gt;  
+##  2 4 Av… 36th St                  40.7            -74.0 N      R     
+##  3 4 Av… 45th St                  40.6            -74.0 R      &lt;NA&gt;  
+##  4 4 Av… 53rd St                  40.6            -74.0 R      &lt;NA&gt;  
+##  5 4 Av… 59th St                  40.6            -74.0 N      R     
+##  6 4 Av… 77th St                  40.6            -74.0 R      &lt;NA&gt;  
+##  7 4 Av… 86th St                  40.6            -74.0 R      &lt;NA&gt;  
+##  8 4 Av… 95th St                  40.6            -74.0 R      &lt;NA&gt;  
+##  9 4 Av… 9th St                   40.7            -74.0 F      G     
+## 10 4 Av… Atlantic Av…             40.7            -74.0 B      Q     
+## # ... with 455 more rows, and 13 more variables: route3 &lt;chr&gt;,
+## #   route4 &lt;chr&gt;, route5 &lt;chr&gt;, route6 &lt;chr&gt;, route7 &lt;chr&gt;, route8 &lt;int&gt;,
+## #   route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;, entrance_type &lt;chr&gt;,
+## #   entry &lt;lgl&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
+</div>
 </div>
 
 
