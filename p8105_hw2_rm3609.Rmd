@@ -48,6 +48,17 @@ count(dist_both, ada)
 ###What proportion of station entrances / exits without vending allow entrance?
 ```{r}
 filter(ny_subway, vending == "NO" & entry == "TRUE" )
-
+69/1868
 ```
-`69/1868` of station entrances / exits without vending allow entrance
+3.69% of station entrances / exits without vending allow entrance
+
+###Reformat data so that route number and route name are distinct variables. How many distinct stations serve the A train? Of the stations that serve the A train, how many are ADA compliant?
+```{r}
+ref_sub = gather(ny_subway, key = route_number, value = route_name, route1:route11) %>% 
+distinct(line, station_name, .keep_all = TRUE )
+count(ref_sub, route_name)
+filter(ref_sub, route_name == "A" & ada == TRUE)
+```
+60 distinct stations serve the A train.
+Of the stations that serve the A train, 17 are ADA compliant.
+

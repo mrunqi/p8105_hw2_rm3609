@@ -243,7 +243,53 @@ dist_both</code></pre>
 ## #   route4 &lt;chr&gt;, route5 &lt;chr&gt;, route6 &lt;chr&gt;, route7 &lt;chr&gt;, route8 &lt;int&gt;,
 ## #   route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;, entrance_type &lt;chr&gt;,
 ## #   entry &lt;lgl&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
-<p><code>69/1868</code> of station entrances / exits without vending allow entrance</p>
+<pre class="r"><code>69/1868</code></pre>
+<pre><code>## [1] 0.0369379</code></pre>
+<p>3.69% of station entrances / exits without vending allow entrance</p>
+</div>
+<div id="reformat-data-so-that-route-number-and-route-name-are-distinct-variables.-how-many-distinct-stations-serve-the-a-train-of-the-stations-that-serve-the-a-train-how-many-are-ada-compliant" class="section level3">
+<h3>Reformat data so that route number and route name are distinct variables. How many distinct stations serve the A train? Of the stations that serve the A train, how many are ADA compliant?</h3>
+<pre class="r"><code>ref_sub = gather(ny_subway, key = route_number, value = route_name, route1:route11) %&gt;% 
+distinct(line, station_name, .keep_all = TRUE )
+count(ref_sub, route_name)</code></pre>
+<pre><code>## # A tibble: 23 x 2
+##    route_name     n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 1             32
+##  2 2             38
+##  3 3             12
+##  4 4             16
+##  5 5              5
+##  6 6             29
+##  7 7             16
+##  8 A             60
+##  9 B             48
+## 10 C              7
+## # ... with 13 more rows</code></pre>
+<pre class="r"><code>filter(ref_sub, route_name == &quot;A&quot; &amp; ada == TRUE)</code></pre>
+<pre><code>## # A tibble: 17 x 10
+##    line  station_name station_latitude station_longitu… entrance_type entry
+##    &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;         &lt;lgl&gt;
+##  1 8 Av… 14th St                  40.7            -74.0 Easement      TRUE 
+##  2 8 Av… 168th St - …             40.8            -73.9 Stair         TRUE 
+##  3 8 Av… 175th St                 40.8            -73.9 Elevator      TRUE 
+##  4 8 Av… 34th St                  40.8            -74.0 Elevator      TRUE 
+##  5 8 Av… 42nd St                  40.8            -74.0 Easement      TRUE 
+##  6 8 Av… 59th St                  40.8            -74.0 Easement      TRUE 
+##  7 8 Av… Inwood - 20…             40.9            -73.9 Elevator      TRUE 
+##  8 8 Av… West 4th St              40.7            -74.0 Elevator      TRUE 
+##  9 8 Av… World Trade…             40.7            -74.0 Stair         TRUE 
+## 10 Broa… Times Squar…             40.8            -74.0 Stair         TRUE 
+## 11 Broa… 59th St-Col…             40.8            -74.0 Stair         TRUE 
+## 12 Broa… Times Square             40.8            -74.0 Easement      TRUE 
+## 13 Cana… 8th Av                   40.7            -74.0 Stair         TRUE 
+## 14 Fran… Franklin Av              40.7            -74.0 Door          TRUE 
+## 15 Fult… Euclid Av                40.7            -73.9 Elevator      TRUE 
+## 16 Fult… Franklin Av              40.7            -74.0 Stair         TRUE 
+## 17 Rock… Howard Beach             40.7            -73.8 Elevator      TRUE 
+## # ... with 4 more variables: vending &lt;chr&gt;, ada &lt;lgl&gt;, route_number &lt;chr&gt;,
+## #   route_name &lt;chr&gt;</code></pre>
+<p>60 distinct stations serve the A train. Of the stations that serve the A train, 17 are ADA compliant.</p>
 </div>
 </div>
 
