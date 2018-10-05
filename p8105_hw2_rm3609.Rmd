@@ -77,3 +77,24 @@ tra_whe = read_excel ("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
 tra_whe
 ```
 
+###Read and clean precipitation data for 2016 and 2017. For each, omit rows without precipitation data and add a variable year. Next, combine datasets and convert month to a character variable .
+```{r}
+prec_17 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+                     sheet = "2017 Precipitation", range = "A2:B14" ) %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(total)) %>% 
+  mutate(year = 2017)
+
+prec_16 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+                     sheet = "2016 Precipitation", range = "A2:B14" ) %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(total)) %>% 
+  mutate(year = 2016)
+
+prec = bind_rows(prec_16, prec_17) %>% 
+  mutate(month = month.name[month])
+
+prec
+```
+
+

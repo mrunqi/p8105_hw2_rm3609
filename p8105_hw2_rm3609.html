@@ -322,6 +322,48 @@ tra_whe</code></pre>
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, grocery_bags &lt;dbl&gt;,
 ## #   chip_bags &lt;dbl&gt;, sports_balls &lt;int&gt;, homes_powered &lt;dbl&gt;</code></pre>
 </div>
+<div id="read-and-clean-precipitation-data-for-2016-and-2017.-for-each-omit-rows-without-precipitation-data-and-add-a-variable-year.-next-combine-datasets-and-convert-month-to-a-character-variable-." class="section level3">
+<h3>Read and clean precipitation data for 2016 and 2017. For each, omit rows without precipitation data and add a variable year. Next, combine datasets and convert month to a character variable .</h3>
+<pre class="r"><code>prec_17 = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx&quot;, 
+                     sheet = &quot;2017 Precipitation&quot;, range = &quot;A2:B14&quot; ) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  filter(!is.na(total)) %&gt;% 
+  mutate(year = 2017)
+
+prec_16 = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx&quot;, 
+                     sheet = &quot;2016 Precipitation&quot;, range = &quot;A2:B14&quot; ) %&gt;% 
+  janitor::clean_names() %&gt;% 
+  filter(!is.na(total)) %&gt;% 
+  mutate(year = 2016)
+
+prec = bind_rows(prec_16, prec_17) %&gt;% 
+  mutate(month = month.name[month])
+
+prec</code></pre>
+<pre><code>## # A tibble: 20 x 3
+##    month     total  year
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 January    3.23  2016
+##  2 February   5.32  2016
+##  3 March      2.24  2016
+##  4 April      1.78  2016
+##  5 May        5.19  2016
+##  6 June       3.2   2016
+##  7 July       6.09  2016
+##  8 August     3.96  2016
+##  9 September  4.53  2016
+## 10 October    0.62  2016
+## 11 November   1.47  2016
+## 12 December   2.32  2016
+## 13 January    2.34  2017
+## 14 February   1.46  2017
+## 15 March      3.57  2017
+## 16 April      3.99  2017
+## 17 May        5.64  2017
+## 18 June       1.4   2017
+## 19 July       7.09  2017
+## 20 August     4.44  2017</code></pre>
+</div>
 </div>
 
 
