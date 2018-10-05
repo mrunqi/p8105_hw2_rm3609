@@ -399,6 +399,30 @@ brfss_smart2010</code></pre>
 ## 10  2010 AL             AL - Mobile County    Poor             6.4
 ## # ... with 10,615 more rows</code></pre>
 </div>
+<div id="structure-data-so-that-values-for-response-excellent-to-poor-are-column-names-variables-which-indicate-the-proportion-of-subjects-with-each-response-which-are-values-of-data_value-in-the-original-dataset" class="section level3">
+<h3>structure data so that values for Response (“Excellent” to “Poor”) are column names / variables which indicate the proportion of subjects with each response (which are values of Data_value in the original dataset)</h3>
+</div>
+<div id="create-a-new-variable-showing-the-proportion-of-responses-that-were-excellent-or-very-good" class="section level3">
+<h3>create a new variable showing the proportion of responses that were “Excellent” or “Very Good”</h3>
+<pre class="r"><code>brfss_smart2010 = spread(brfss_smart2010, key = response, value = data_value) %&gt;%
+  janitor::clean_names() %&gt;%  
+  mutate(exc_or_very_good = excellent + very_good)
+brfss_smart2010</code></pre>
+<pre><code>## # A tibble: 2,125 x 9
+##     year loccation_abbr location_desc excellent  fair  good  poor very_good
+##    &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+##  1  2002 AK             AK - Anchora…      27.9   8.6  23.8   5.9      33.7
+##  2  2002 AL             AL - Jeffers…      18.5  12.1  32.7   5.9      30.9
+##  3  2002 AR             AR - Pulaski…      24.1  12.5  29.9   4.2      29.3
+##  4  2002 AZ             AZ - Maricop…      21.6  10.3  26.9   4.6      36.6
+##  5  2002 AZ             AZ - Pima Co…      26.6   7.5  31.9   3.9      30.1
+##  6  2002 CA             CA - Los Ang…      22.7  14.3  28.7   4.5      29.8
+##  7  2002 CO             CO - Adams C…      21.2  14.4  29     4.2      31.2
+##  8  2002 CO             CO - Arapaho…      25.5   8    29.3   2.1      35.2
+##  9  2002 CO             CO - Denver …      22.2  11.1  36.6   3        27.1
+## 10  2002 CO             CO - Jeffers…      23.4  11.4  26.3   2.4      36.6
+## # ... with 2,115 more rows, and 1 more variable: exc_or_very_good &lt;dbl&gt;</code></pre>
+</div>
 </div>
 
 
