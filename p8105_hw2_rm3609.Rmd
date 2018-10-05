@@ -108,7 +108,7 @@ library(p8105.datasets)
 data(brfss_smart2010)
 
 brfss_smart2010 = janitor::clean_names(brfss_smart2010) %>% 
-  rename(resp_id = respid, loccation_abbr = locationabbr, location_desc = locationdesc) %>% 
+  rename(resp_id = respid, location_abbr = locationabbr, location_desc = locationdesc) %>% 
   filter(topic == "Overall Health")  %>% 
   select(year:location_desc, response, data_value)
 
@@ -123,5 +123,13 @@ brfss_smart2010 = spread(brfss_smart2010, key = response, value = data_value) %>
   mutate(exc_or_very_good = excellent + very_good)
 brfss_smart2010
 ```
+
+####How many unique locations are included in the dataset? Is every state represented? What state is observed the most?
+```{r}
+dim(brfss_smart2010)
+count(brfss_smart2010, location_abbr, sort = TRUE)
+```
+There are 2125 unique locations are included in the dataset. Every state is represented. New Jersey is observed the most.
+
 
 

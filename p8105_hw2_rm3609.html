@@ -379,24 +379,24 @@ prec</code></pre>
 data(brfss_smart2010)
 
 brfss_smart2010 = janitor::clean_names(brfss_smart2010) %&gt;% 
-  rename(resp_id = respid, loccation_abbr = locationabbr, location_desc = locationdesc) %&gt;% 
+  rename(resp_id = respid, location_abbr = locationabbr, location_desc = locationdesc) %&gt;% 
   filter(topic == &quot;Overall Health&quot;)  %&gt;% 
   select(year:location_desc, response, data_value)
 
 brfss_smart2010</code></pre>
 <pre><code>## # A tibble: 10,625 x 5
-##     year loccation_abbr location_desc         response  data_value
-##    &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;                 &lt;chr&gt;          &lt;dbl&gt;
-##  1  2010 AL             AL - Jefferson County Excellent       18.9
-##  2  2010 AL             AL - Jefferson County Very good       30  
-##  3  2010 AL             AL - Jefferson County Good            33.1
-##  4  2010 AL             AL - Jefferson County Fair            12.5
-##  5  2010 AL             AL - Jefferson County Poor             5.5
-##  6  2010 AL             AL - Mobile County    Excellent       15.6
-##  7  2010 AL             AL - Mobile County    Very good       31.3
-##  8  2010 AL             AL - Mobile County    Good            31.2
-##  9  2010 AL             AL - Mobile County    Fair            15.5
-## 10  2010 AL             AL - Mobile County    Poor             6.4
+##     year location_abbr location_desc         response  data_value
+##    &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                 &lt;chr&gt;          &lt;dbl&gt;
+##  1  2010 AL            AL - Jefferson County Excellent       18.9
+##  2  2010 AL            AL - Jefferson County Very good       30  
+##  3  2010 AL            AL - Jefferson County Good            33.1
+##  4  2010 AL            AL - Jefferson County Fair            12.5
+##  5  2010 AL            AL - Jefferson County Poor             5.5
+##  6  2010 AL            AL - Mobile County    Excellent       15.6
+##  7  2010 AL            AL - Mobile County    Very good       31.3
+##  8  2010 AL            AL - Mobile County    Good            31.2
+##  9  2010 AL            AL - Mobile County    Fair            15.5
+## 10  2010 AL            AL - Mobile County    Poor             6.4
 ## # ... with 10,615 more rows</code></pre>
 </div>
 <div id="structure-data-so-that-values-for-response-excellent-to-poor-are-column-names-variables-which-indicate-the-proportion-of-subjects-with-each-response-which-are-values-of-data_value-in-the-original-dataset" class="section level3">
@@ -409,19 +409,40 @@ brfss_smart2010</code></pre>
   mutate(exc_or_very_good = excellent + very_good)
 brfss_smart2010</code></pre>
 <pre><code>## # A tibble: 2,125 x 9
-##     year loccation_abbr location_desc excellent  fair  good  poor very_good
-##    &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-##  1  2002 AK             AK - Anchora…      27.9   8.6  23.8   5.9      33.7
-##  2  2002 AL             AL - Jeffers…      18.5  12.1  32.7   5.9      30.9
-##  3  2002 AR             AR - Pulaski…      24.1  12.5  29.9   4.2      29.3
-##  4  2002 AZ             AZ - Maricop…      21.6  10.3  26.9   4.6      36.6
-##  5  2002 AZ             AZ - Pima Co…      26.6   7.5  31.9   3.9      30.1
-##  6  2002 CA             CA - Los Ang…      22.7  14.3  28.7   4.5      29.8
-##  7  2002 CO             CO - Adams C…      21.2  14.4  29     4.2      31.2
-##  8  2002 CO             CO - Arapaho…      25.5   8    29.3   2.1      35.2
-##  9  2002 CO             CO - Denver …      22.2  11.1  36.6   3        27.1
-## 10  2002 CO             CO - Jeffers…      23.4  11.4  26.3   2.4      36.6
+##     year location_abbr location_desc excellent  fair  good  poor very_good
+##    &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+##  1  2002 AK            AK - Anchora…      27.9   8.6  23.8   5.9      33.7
+##  2  2002 AL            AL - Jeffers…      18.5  12.1  32.7   5.9      30.9
+##  3  2002 AR            AR - Pulaski…      24.1  12.5  29.9   4.2      29.3
+##  4  2002 AZ            AZ - Maricop…      21.6  10.3  26.9   4.6      36.6
+##  5  2002 AZ            AZ - Pima Co…      26.6   7.5  31.9   3.9      30.1
+##  6  2002 CA            CA - Los Ang…      22.7  14.3  28.7   4.5      29.8
+##  7  2002 CO            CO - Adams C…      21.2  14.4  29     4.2      31.2
+##  8  2002 CO            CO - Arapaho…      25.5   8    29.3   2.1      35.2
+##  9  2002 CO            CO - Denver …      22.2  11.1  36.6   3        27.1
+## 10  2002 CO            CO - Jeffers…      23.4  11.4  26.3   2.4      36.6
 ## # ... with 2,115 more rows, and 1 more variable: exc_or_very_good &lt;dbl&gt;</code></pre>
+<div id="how-many-unique-locations-are-included-in-the-dataset-is-every-state-represented-what-state-is-observed-the-most" class="section level4">
+<h4>How many unique locations are included in the dataset? Is every state represented? What state is observed the most?</h4>
+<pre class="r"><code>dim(brfss_smart2010)</code></pre>
+<pre><code>## [1] 2125    9</code></pre>
+<pre class="r"><code>count(brfss_smart2010, location_abbr, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 51 x 2
+##    location_abbr     n
+##    &lt;chr&gt;         &lt;int&gt;
+##  1 NJ              146
+##  2 FL              122
+##  3 NC              115
+##  4 WA               97
+##  5 MD               90
+##  6 MA               79
+##  7 TX               71
+##  8 NY               65
+##  9 SC               63
+## 10 CO               59
+## # ... with 41 more rows</code></pre>
+<p>There are 2125 unique locations are included in the dataset. Every state is represented. New Jersey is observed the most.</p>
+</div>
 </div>
 </div>
 
