@@ -131,5 +131,22 @@ count(brfss_smart2010, location_abbr, sort = TRUE)
 ```
 There are 2125 unique locations are included in the dataset. Every state is represented. New Jersey is observed the most.
 
+###In 2002, what is the median of the “Excellent” response value?
+```{r}
+median(subset(brfss_smart2010, year = "2002")$"excellent", na.rm = TRUE)
+```
+
+###Make a histogram of “Excellent” response values in the year 2002.
+```{r}
+ggplot(subset(brfss_smart2010, year = "2002"), aes(x = excellent)) + geom_histogram()
+```
+
+###Make a scatterplot showing the proportion of “Excellent” response values in New York Countyand Queens County (both in NY State) in each year from 2002 to 2010.
+```{r}
+
+```
+
+
+
 
 
