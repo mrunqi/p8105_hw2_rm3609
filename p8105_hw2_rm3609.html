@@ -211,6 +211,39 @@ dist_both</code></pre>
 ## #   route4 &lt;chr&gt;, route5 &lt;chr&gt;, route6 &lt;chr&gt;, route7 &lt;chr&gt;, route8 &lt;int&gt;,
 ## #   route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;, entrance_type &lt;chr&gt;,
 ## #   entry &lt;lgl&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
+<p>There are 465 distinct stations.</p>
+</div>
+<div id="how-many-stations-are-ada-compliant" class="section level3">
+<h3>How many stations are ADA compliant?</h3>
+<pre class="r"><code>count(dist_both, ada)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   ada       n
+##   &lt;lgl&gt; &lt;int&gt;
+## 1 FALSE   381
+## 2 TRUE     84</code></pre>
+<p>84 stations</p>
+</div>
+<div id="what-proportion-of-station-entrances-exits-without-vending-allow-entrance" class="section level3">
+<h3>What proportion of station entrances / exits without vending allow entrance?</h3>
+<pre class="r"><code>filter(ny_subway, vending == &quot;NO&quot; &amp; entry == &quot;TRUE&quot; )</code></pre>
+<pre><code>## # A tibble: 69 x 19
+##    line  station_name station_latitude station_longitu… route1 route2
+##    &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+##  1 4 Av… 9th St                   40.7            -74.0 F      G     
+##  2 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  3 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  4 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  5 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  6 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  7 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  8 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+##  9 6 Av… 7th Av                   40.7            -74.0 F      &lt;NA&gt;  
+## 10 6 Av… Bergen St                40.7            -74.0 F      G     
+## # ... with 59 more rows, and 13 more variables: route3 &lt;chr&gt;,
+## #   route4 &lt;chr&gt;, route5 &lt;chr&gt;, route6 &lt;chr&gt;, route7 &lt;chr&gt;, route8 &lt;int&gt;,
+## #   route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;, entrance_type &lt;chr&gt;,
+## #   entry &lt;lgl&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
+<p><code>69/1868</code> of station entrances / exits without vending allow entrance</p>
 </div>
 </div>
 

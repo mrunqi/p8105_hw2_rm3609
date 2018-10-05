@@ -37,4 +37,17 @@ The data is not tidy yet. Some column names contain variable.
 dist_both = distinct(ny_subway, line, station_name, .keep_all = TRUE )
 dist_both
 ```
+There are 465 distinct stations.
 
+###How many stations are ADA compliant?
+```{r}
+count(dist_both, ada)
+```
+84 stations
+
+###What proportion of station entrances / exits without vending allow entrance?
+```{r}
+filter(ny_subway, vending == "NO" & entry == "TRUE" )
+
+```
+`69/1868` of station entrances / exits without vending allow entrance
