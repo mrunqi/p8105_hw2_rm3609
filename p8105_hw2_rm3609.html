@@ -366,6 +366,17 @@ prec</code></pre>
 </div>
 <div id="write-a-paragraph-about-these-data.-be-sure-to-note-the-number-of-observations-in-both-resulting-datasets-and-give-examples-of-key-variables.-for-available-data-what-was-the-total-precipitation-in-2017-what-was-the-median-number-of-sports-balls-in-a-dumpster-in-2016" class="section level3">
 <h3>Write a paragraph about these data. Be sure to note the number of observations in both resulting datasets, and give examples of key variables. For available data, what was the total precipitation in 2017? What was the median number of sports balls in a dumpster in 2016?</h3>
+<pre class="r"><code>dim(tra_whe)</code></pre>
+<pre><code>## [1] 215  14</code></pre>
+<pre class="r"><code>dim(prec_16)</code></pre>
+<pre><code>## [1] 12  3</code></pre>
+<pre class="r"><code>dim(prec_17)</code></pre>
+<pre><code>## [1] 8 3</code></pre>
+<pre class="r"><code>sum(prec_17$total)</code></pre>
+<pre><code>## [1] 29.93</code></pre>
+<pre class="r"><code>median(subset(tra_whe, year = &quot;2016&quot;)$sports_balls)</code></pre>
+<pre><code>## [1] 13</code></pre>
+<p>There are 215 observations in Mr. Trash Wheel sheet, 12 observations in 2016 Precipitation sheet, 8 observations in 2017 Precipitation sheet. The total precipitation in 2017 is 29.93. The median number of sports balls in a dumpster in 2016 is 13.</p>
 </div>
 </div>
 <div id="problem-3" class="section level1">

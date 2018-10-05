@@ -98,6 +98,18 @@ prec
 ```
 
 ###Write a paragraph about these data. Be sure to note the number of observations in both resulting datasets, and give examples of key variables. For available data, what was the total precipitation in 2017? What was the median number of sports balls in a dumpster in 2016?
+```{r}
+dim(tra_whe)
+dim(prec_16)
+dim(prec_17)
+sum(prec_17$total)
+median(subset(tra_whe, year = "2016")$sports_balls)
+```
+
+
+There are 215 observations in Mr. Trash Wheel sheet, 12 observations in 2016 Precipitation sheet, 8 observations in 2017 Precipitation sheet.
+The total precipitation in 2017 is 29.93.
+The median number of sports balls in a dumpster in 2016 is 13.
 
 #Problem 3
 
